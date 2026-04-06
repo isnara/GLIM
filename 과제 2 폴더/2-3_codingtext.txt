@@ -1,0 +1,37 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int solution(vector<vector<int>> dots) {
+    int answer = 0;
+    
+        if (dots.size() != 4)
+        return answer;
+
+    int nMinX = 256, nMaxX = -256;
+	int nMinY = 256, nMaxY = -256;
+
+    for(int i = 0; i < dots.size(); i++)
+    {
+        if (dots[i].size() != 2 ||
+            (dots[i][0] <= -256 && dots[i][0] >= 256) ||
+            (dots[i][1] <= -256 && dots[i][1] >= 256))
+        {
+            return answer;
+        }
+
+        if(nMinX > dots[i][0])
+			nMinX = dots[i][0];
+		if (nMaxX < dots[i][0])
+			nMaxX = dots[i][0];
+		if (nMinY > dots[i][1])
+			nMinY = dots[i][1];
+		if (nMaxY < dots[i][1])
+			nMaxY = dots[i][1];
+	}
+
+	answer = (nMaxX - nMinX) * (nMaxY - nMinY);
+    
+    return answer;
+}
